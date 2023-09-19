@@ -10,14 +10,17 @@ def plot_features(data: pd.DataFrame):
     plt.figure()  
     sns.pairplot(data, hue='label')
     
-    # Plot features using scatter plot
-    plt.figure()
-    encoder = LabelEncoder()
-    data['label'] = encoder.fit_transform(data['label'])
-    labels = data['label'].unique()
-    plt.scatter(data['number'], data['label'], c=data['label'])
-    plt.xlabel('Numbers')
-    plt.ylabel('Labels')
-    plt.yticks(labels, encoder.inverse_transform(labels))
-    plt.title('Numbers vs Labels')
-    plt.show()
+    try:
+        # Plot features using scatter plot
+        plt.figure()
+        encoder = LabelEncoder()
+        data['label'] = encoder.fit_transform(data['label'])
+        labels = data['label'].unique()
+        plt.scatter(data['number'], data['label'], c=data['label'])
+        plt.xlabel('Numbers')
+        plt.ylabel('Labels')
+        plt.yticks(labels, encoder.inverse_transform(labels))
+        plt.title('Numbers vs Labels')
+        plt.show()
+    except:
+        pass
