@@ -19,7 +19,7 @@ class DataLoader:
         assert os.path.isfile(self.data_path + filename), 'Data file does not exist.'
         
         # Read data from file
-        df_data = pd.read_csv(self.data_path + filename)
+        df_data = pd.read_csv(self.data_path + filename, na_filter=False)
         df_data['label'] = df_data['label'].astype(str)
         if return_df:
             return  df_data
