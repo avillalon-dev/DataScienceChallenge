@@ -36,8 +36,8 @@ The models were evaluated using accuracy as metric. The best model was selected 
 ## 6. Results and Insights <a name="results-and-insights"></a>
 In the experiments, both sets were utilized, with the new feature set yielding superior results.
 
-[Classifiers in original data](MLClassification/fizzbuzz_classification/images/originaldata_classifiers_comparison.png)
-[Best classifier confusion matrix](MLClassification/fizzbuzz_classification/images/originaldata_bestclassifier_cm.png)
+[Classifiers in original data](./fizzbuzz_classification/images/originaldata_classifiers_comparison.png)
+[Best classifier confusion matrix](./fizzbuzz_classification/images/originaldata_bestclassifier_cm.png)
 
 ## 7. Conclusion <a name="conclusion"></a>
 
