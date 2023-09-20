@@ -87,7 +87,7 @@ class ModulusTransformer(BaseEstimator, TransformerMixin):
         self.fit(X, y)
         return self.transform(X)
 
-def transform_series_to_frequency(data: pd.DataFrame, return_estimator = False):
+def transform_series_to_periods(data: pd.DataFrame, return_estimator = False):
     """
     Transform a series of numbers in a DataFrame into frequency-based features.
 
