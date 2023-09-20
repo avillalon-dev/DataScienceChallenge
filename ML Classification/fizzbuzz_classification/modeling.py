@@ -51,25 +51,40 @@ def test_estimator(model: BaseEstimator, X, y, display = True):
         cmD.plot()
     return accuracy
     
-def tune_hyperparam(model: BaseEstimator, X_train, y_train, X_test, y_test, param_grid: dict, cv, verbose, fit_params = None):
+def tune_hyperparam(estimator: BaseEstimator, X_train, y_train, X_test, y_test, param_grid: dict, cv, verbose, fit_params = None):
+    
+    # Get the current package name
+    package_name = __package__
+    # Get the type of the estimator as a string
+    estimator_name = str(type(estimator).__name__)
+    # Use estimator_name to save the estimator
+    file_name = os.path.join(os.getcwd(), f"{package_name}/models/{estimator_name}_best_params.pkl")
+    
+    if not os.path.exists(file_name):
+        # Create a GridSearchCV instance
+        grid_search = GridSearchCV(estimator=estimator, param_grid=param_grid, cv=cv, verbose=verbose)
 
-    # Create a GridSearchCV instance
-    grid_search = GridSearchCV(estimator=model, param_grid=param_grid, cv=cv, verbose=verbose)
+        # Fit the grid search to the training data with fit_params
+        if fit_params is not None:
+            grid_search.fit(X_train, y_train, **fit_params)
+        else:
+            grid_search.fit(X_train, y_train)
 
-    # Fit the grid search to the training data with fit_params
-    if fit_params is not None:
-        grid_search.fit(X_train, y_train, **fit_params)
+        # Print the best hyperparameters
+        print("Best Hyperparameters:", grid_search.best_params_)
+
+        # Evaluate the model with the best hyperparameters
+        best_svc = grid_search.best_estimator_
+        accuracy = best_svc.score(X_test, y_test)
+        print("Accuracy with Best Hyperparameters:", accuracy)
+        
+        # Save the best parameters to a file
+        with open(file_name, 'wb') as fout:
+            pickle.dump(grid_search.best_params_, fout)
+        return grid_search.best_params_
     else:
-        grid_search.fit(X_train, y_train)
-
-    # Print the best hyperparameters
-    print("Best Hyperparameters:", grid_search.best_params_)
-
-    # Evaluate the model with the best hyperparameters
-    best_svc = grid_search.best_estimator_
-    accuracy = best_svc.score(X_test, y_test)
-    print("Accuracy with Best Hyperparameters:", accuracy)
-    return grid_search.best_params_
+        with open(file_name, 'rb') as fin:
+            return pickle.load(fin)
 
 def train_and_test_classifier(estimator: BaseEstimator, X_train, y_train, X_test=None, y_test=None, params=None, fit_params=None):
     """

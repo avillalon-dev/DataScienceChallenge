@@ -71,3 +71,6 @@ class DataLoader:
         # Save data to csv files
         df_data = pd.DataFrame(np.concatenate([features, labels], axis=1), columns=['number', 'label'])
         df_data.to_csv(os.path.join(self.data_path, str.join('_', [self.data_filename, str(set_length), 'original']) + '.csv'), index=False)
+        
+    def save_data(self, df_data: pd.DataFrame, set: str, set_length: int = 100) -> None:
+        df_data.to_csv(os.path.join(self.data_path, str.join('_', [self.data_filename, str(set_length), set]) + '.csv'), index=False)
