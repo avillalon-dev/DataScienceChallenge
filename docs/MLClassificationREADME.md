@@ -1,7 +1,7 @@
 # Machine learning classification
 ML FizzBuzz test to build classification models.
 
- ## Table of Contents
+## Table of Contents
 1. [Project Overview](#project-overview)
 2. [Data Description](#data-description)
 3. [Classification Model](#classification-model)
