@@ -1,11 +1,24 @@
 import os
+import numpy as np
 
 from sklearn.base import BaseEstimator
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, ConfusionMatrixDisplay
 import pickle
 
-# Train, save and load classifier
+def weights_for_imbalance_classes(labels: np.ndarray) -> np.ndarray:
+    unique_labels, count_labels = np.unique(labels, return_counts=True)
+    samples_count = labels.shape[0]
+    weights = np.zeros_like(labels)
+    weights_labels = np.zeros_like(count_labels, dtype=float)
+    for i, l in enumerate(unique_labels):
+        weights_labels[i] = samples_count / count_labels[i]*2 # Calculate weight for each class
+    for i, l in enumerate(unique_labels):
+        idx = labels == l
+        weights[idx] = weights_labels[i]
+        
+    return weights
+
 def train_estimator(estimator: BaseEstimator, X, y, params = None, fit_params = None):
     # Set hyperparameters if provided
     if params is not None:
