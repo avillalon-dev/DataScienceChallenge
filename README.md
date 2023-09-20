@@ -5,7 +5,7 @@
 1. [Machine learning classification](#ml-classification)
 
 ## 1. Machine learning classification <a name="ml-classification"></a>
-[ML FizzBuzz test](ML Classification/README.md).
+[ML FizzBuzz test](MLClassification/README.md).
 - Data generation: Write a program that given the numbers from 1 to 100 print “None” for each number. But for multiples of three print “Fizz” instead of “None” and for the multiples of five print “Buzz”. For numbers which are multiples of both three and five print “FizzBuzz”.
 
 **Requirements:**
