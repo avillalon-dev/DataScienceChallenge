@@ -34,7 +34,7 @@ The models were evaluated using accuracy as metric. The best model was selected 
 
 
 ## 6. Results and Insights <a name="results-and-insights"></a>
-
+In the experiments, both sets were utilized, with the new feature set yielding superior results.
 
 ## 7. Conclusion <a name="conclusion"></a>
 

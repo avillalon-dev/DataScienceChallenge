@@ -87,7 +87,7 @@ class ModulusTransformer(BaseEstimator, TransformerMixin):
         self.fit(X, y)
         return self.transform(X)
 
-def transform_series_to_periods(data: pd.DataFrame, return_estimator = False):
+def transform_series_to_periods(data: pd.DataFrame, estimators: ModulusTransformer = None, return_estimator = False):
     """
     Transform a series of numbers in a DataFrame into frequency-based features.
 
@@ -99,22 +99,25 @@ def transform_series_to_periods(data: pd.DataFrame, return_estimator = False):
         pd.DataFrame: The transformed DataFrame with frequency-based features.
         list: List of transformers if return_estimator is True.
     """
-    divisors = []
-    for l in np.unique(data['label']):
-        if l == 'None': continue
-        idx = data['label'] == l
-        features_l = data['number'][idx]
-        diff = np.diff(features_l, n = 1, axis=0)
-        divisors.append(find_common_denominators(diff))
-        
-    divisors = np.unique(flatten([divisors]))
+    if estimators is None:
+        divisors = []
+        for l in np.unique(data['label']):
+            if l == 'None': continue
+            idx = data['label'] == l
+            features_l = data['number'][idx]
+            diff = np.diff(features_l, n = 1, axis=0)
+            divisors.append(find_common_denominators(diff))
+            
+        divisors = np.unique(flatten([divisors]))
+        estimators = []
+        for divisor in divisors:
+            estimator = ModulusTransformer(divisor)
+            estimators.append(estimator)
+    
     new_features = pd.DataFrame(index=data.index)
-    estimators = []
-    for divisor in divisors:
-        estimator = ModulusTransformer(divisor)
+    for estimator in estimators:
         feature_mod = estimator.fit_transform(data['number'])
-        estimators.append(estimator)
-        new_features['number_mod' + str(divisor)] = feature_mod
+        new_features['number_mod' + str(estimator.divisor)] = feature_mod
         
     if return_estimator:
         return new_features, estimators
