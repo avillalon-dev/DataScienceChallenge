@@ -5,7 +5,7 @@
 1. [Machine learning classification](#ml-classification)
 
 ## 1. Machine learning classification <a name="ml-classification"></a>
-ML FizzBuzz test.
+[ML FizzBuzz test](ML Classification/README.md).
 - Data generation: Write a program that given the numbers from 1 to 100 print “None” for each number. But for multiples of three print “Fizz” instead of “None” and for the multiples of five print “Buzz”. For numbers which are multiples of both three and five print “FizzBuzz”.
 
 **Requirements:**
@@ -21,4 +21,4 @@ ML FizzBuzz test.
 - Publish the trained model as a web service
 - Create unit tests for the implementation with a test coverage >=80%
 
-*The required theoretical description should be put with the other files from the project, could be in the README or other documentation format. When you finish the test please share the links with us.*
+*The required theoretical description should be put with the other files from the project, could be in the README or other documentation format.*
