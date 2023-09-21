@@ -59,7 +59,7 @@ class ModulusTransformer(BaseEstimator, TransformerMixin):
         Returns:
         np.ndarray: An array of modulus values.
         """
-        return [x % self.divisor for x in X]
+        return X % self.divisor
     
     def inverse_transform(self, X):
         """
