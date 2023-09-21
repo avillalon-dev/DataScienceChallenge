@@ -36,8 +36,13 @@ The models were evaluated using accuracy as metric. The best model was selected 
 ## 6. Results and Insights <a name="results-and-insights"></a>
 In the experiments, both sets were utilized, with the new feature set yielding superior results.
 
+Results with natural numbers
 ![Classifiers in original data](./fizzbuzz_classification/images/originaldata_classifiers_comparison.png)
-![Best classifier confusion matrix](./fizzbuzz_classification/images/originaldata_bestclassifier_cm.png)
+![Best classifier in original data confusion matrix](./fizzbuzz_classification/images/originaldata_bestclassifier_cm.png)
+
+Results with period-based features
+![Classifiers in preprocessed data](./fizzbuzz_classification/images/preprocesseddata_classifiers_comparison.png)
+![Best classifier in preprocessed data confusion matrix](./fizzbuzz_classification/images/preprocesseddata_bestclassifier_cm.png)
 
 ## 7. Conclusion <a name="conclusion"></a>
 

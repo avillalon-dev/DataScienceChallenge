@@ -16,12 +16,12 @@ def plot_features(data: pd.DataFrame):
         # Plot features using scatter plot
         plt.figure()
         encoder = LabelEncoder()
-        data['label'] = encoder.fit_transform(data['label'])
-        labels = data['label'].unique()
-        plt.scatter(data['number'], data['label'], c=data['label'])
+        labels = encoder.fit_transform(data['label'])
+        unique_labels = np.unique(labels)
+        plt.scatter(data['number'], data['label'], c=labels)
         plt.xlabel('Numbers')
         plt.ylabel('Labels')
-        plt.yticks(labels, encoder.inverse_transform(labels))
+        plt.yticks(unique_labels, data['label'].unique())
         plt.title('Numbers vs Labels')
         plt.show()
     except:
