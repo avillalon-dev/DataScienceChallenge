@@ -36,7 +36,9 @@ The models were evaluated using accuracy as metric. The best model was selected 
 
 
 ## 6. Results and Insights <a name="results-and-insights"></a>
-In the experiments, both sets were utilized, with the new feature set yielding superior results.
+Experiments were conducted using two datasets: the first containing the original data with natural numbers, and the second comprising features generated during data transformation. Both classification models were evaluated and compared on both datasets.
+The outcomes from the original dataset suggest that the decision tree classifier outperformed the SVM. However, with the second dataset, both models achieved a perfect accuracy score.
+The results strongly imply that the feature set obtained after transformation leads to superior performance.
 
 Results with natural numbers
 ![Classifiers in original data](./fizzbuzz_classification/images/originaldata_classifiers_comparison.png)
