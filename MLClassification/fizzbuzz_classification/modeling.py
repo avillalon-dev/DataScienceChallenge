@@ -3,7 +3,7 @@ import numpy as np
 from typing import Sequence
 
 from sklearn.base import BaseEstimator
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import train_test_split, GridSearchCV, cross_validate
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import pickle
 
@@ -136,6 +136,16 @@ def train_and_test_classifier(estimators: Sequence[BaseEstimator], X_train, y_tr
             train_info.append({'name': estimator_name, 'train_accuracy': train_accuracy})
         
     return trained_estimators, train_info
+
+def cross_validate_classifiers(estimators: Sequence[BaseEstimator], X, y, k, fit_params=None):
+    cv_info = []
+    for e, estimator in enumerate(estimators):
+        estimator_name = str(type(estimator).__name__)
+        # Cross validate the classifier
+        cv_results = cross_validate(estimator, X, y, fit_params=fit_params, return_train_score=True, return_estimator=True)
+        cv_info.append({'name': estimator_name, 'train_accuracy': np.mean(cv_results['train_score']), 'test_accuracy': np.mean(cv_results['test_score'])})
+        
+    return cv_info
 
 def get_best_estimator(classifiers_info: Sequence[dict]):
     # Extract testing accuracies

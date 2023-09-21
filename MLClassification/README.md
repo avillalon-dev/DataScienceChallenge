@@ -48,6 +48,9 @@ Results with period-based features
 ![Classifiers in preprocessed data](./fizzbuzz_classification/images/preprocesseddata_classifiers_comparison.png)
 ![Best classifier in preprocessed data confusion matrix](./fizzbuzz_classification/images/preprocesseddata_bestclassifier_cm.png)
 
+K-fold cross validation with k = 10 using natural numbers
+![Classifiers cv in original data](./fizzbuzz_classification/images/originaldata_classifiers_cv.png)
+
 
 ## 7. Conclusions <a name="conclusions"></a>
 The problem in this project focused on classifying natural numbers into four classes: "None," "Fizz," "Buzz," and "FizzBuzz." Two datasets were employed: one with original natural numbers and the other with features generated during data transformation. The results indicated that the DT classifier outperformed the SVM when using the original dataset. However, when utilizing the transformed dataset, both models achieved perfect accuracy scores. This underscores the crucial role of data transformation and feature engineering in enhancing classification performance.

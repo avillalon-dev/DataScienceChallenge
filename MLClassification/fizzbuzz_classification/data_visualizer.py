@@ -57,15 +57,16 @@ def plot_train_results(classifiers_info: Sequence[dict], labels):
     plt.tight_layout()
     plt.show()
 
-    # Create separate figures with subplots for confusion matrices
-    for i, clf in enumerate(classifiers_info):
-        cm = clf['confusion_matrix']
-        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
+    if 'confusion_matrix' in classifiers_info[0]:
+        # Create separate figures with subplots for confusion matrices
+        for i, clf in enumerate(classifiers_info):
+            cm = clf['confusion_matrix']
+            disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
 
-        # Create a separate figure for each classifier
-        fig, ax = plt.subplots(figsize=(6, 6))
-        disp.plot(ax=ax, cmap=plt.cm.Blues)
-        ax.set_title(f'{clf["name"]} Confusion Matrix')
+            # Create a separate figure for each classifier
+            fig, ax = plt.subplots(figsize=(6, 6))
+            disp.plot(ax=ax, cmap=plt.cm.Blues)
+            ax.set_title(f'{clf["name"]} Confusion Matrix')
 
-        plt.tight_layout()
-        plt.show()
+            plt.tight_layout()
+            plt.show()
