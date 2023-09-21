@@ -30,6 +30,23 @@ To address the problem, various classification models were considered, including
 - Support Vector Machine (SVM): SVM is a powerful and versatile machine learning model, capable of performing linear or nonlinear classification, seeking the optimal decision boundary for the separation of distinct classes of data points. The core concept of SVMs involves the establishment of a decision boundary that maximizes the margin—the distance between the nearest data points belonging to distinct classes. Consider a dataset comprising two classes that can be divided by a straight line. In this scenario, the best line (referred to as the decision boundary) is determined by SVMs. This line is not only responsible for class separation but also ensures the maximum distance is maintained from the nearest data points of each class. This approach guarantees robust performance when applied to new data.
 - Decision tree (DT): The DT classifier is a versatile machine learning algorithm widely used in classification problems. At its core, it operates by recursively partitioning the feature space into subsets, making decisions at each node based on feature values. This process continues until leaf nodes represent class labels. Decision trees are valued for their interpretability, as they provide clear, human-readable rules for classification. They have the ability to handle both categorical and numerical features, and adapt to complex decision boundaries.
 
+You have the flexibility to explore and test other classification models in addition to the ones provided in this project. To do so, follow these steps:
+
+- Open the [notebook](./fizzbuzz_notebook.ipynb) associated with this project.
+- Navigate to the `Model Architectures` section within the notebook.
+- Import the desired classification model that you want to test. For example, the following code was used to import the SVM and Decision Tree classifiers:
+```python
+# Import classifiers
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+
+# Initialize models 
+classifiers = [
+    SVC(),                    # Support vector machine classifier
+    DecisionTreeClassifier()  # Decision tree classifier
+]
+```
+
 
 ## 5. Evaluation Metrics <a name="evaluation-metrics"></a>
 The models were evaluated using accuracy as metric. The best model was selected based on higher accuracy values.
