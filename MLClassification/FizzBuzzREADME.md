@@ -76,6 +76,7 @@ The results strongly imply that the feature set obtained after transformation le
 ![Classifiers in original data](./fizzbuzz_classification/images/originaldata_classifiers_comparison.png)
 
 **Best classifier confusion matrix**
+
 ![Best classifier in original data confusion matrix](./fizzbuzz_classification/images/originaldata_bestclassifier_cm.png)
 
 **K-fold cross validation with k = 10 using natural numbers**
