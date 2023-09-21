@@ -8,6 +8,15 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import ConfusionMatrixDisplay
 
 def plot_features(data: pd.DataFrame):
+    """
+    Plot features for visualization using seaborn and scatter plot.
+
+    Args:
+        data (pd.DataFrame): DataFrame containing feature data with a 'label' column.
+
+    Note:
+        This function visualizes features using seaborn's pairplot and a scatter plot if the data is suitable for scatter plotting.
+    """
     # Plot features using seaborn
     plt.figure()  
     sns.pairplot(data, hue='label')
@@ -28,11 +37,16 @@ def plot_features(data: pd.DataFrame):
         pass
     
 def plot_train_results(classifiers_info: Sequence[dict], labels):
-    # for info in estimators_info:
-    #     confusion_matrix = info['confusion_matrix']
-    #     cmD = ConfusionMatrixDisplay(confusion_matrix)
-    #     cmD.plot()
-    #     plt.title(info['name'])
+    """
+    Plot training and testing results for multiple classifiers.
+
+    Args:
+        classifiers_info (Sequence[dict]): A sequence of dictionaries containing classifier information, including names, training accuracies, testing accuracies, and optional confusion matrices.
+        labels (list or array-like): List of labels for confusion matrix display.
+
+    Note:
+        This function generates bar plots to compare the training and testing accuracies of multiple classifiers and displays confusion matrices if available.
+    """
         
     # Extract classifier names, training accuracies, and testing accuracies
     classifier_names = [clf['name'] for clf in classifiers_info]

@@ -5,14 +5,46 @@ import pandas as pd
 import numpy as np
 
 class DataLoader:
+    """
+    A class for loading and generating data for the FizzBuzz classification task.
+
+    Attributes:
+        data_path (str): The path to the data directory.
+        data_filename (str): The base name of the data files.
+
+    Methods:
+        load_data(set: Literal['original', 'preprocessed'], set_length: int = 100, return_df: bool = True) -> tuple[np.ndarray, np.ndarray]:
+            Load FizzBuzz classification data from a CSV file.
+
+        generate_data(set_length: int = 100) -> None:
+            Generate and save FizzBuzz classification data to a CSV file.
+
+        save_data(df_data: pd.DataFrame, set: str, set_length: int = 100) -> None:
+            Save DataFrame containing FizzBuzz classification data to a CSV file.
+    """
     def __init__(self):
+        """
+        Initializes the DataLoader instance.
+
+        The constructor sets the data path and filename attributes and creates the data directory if it does not exist.
+        """
         self.data_path = os.getcwd() + '/fizzbuzz_classification/data/'
         if not os.path.isdir(self.data_path):
             os.mkdir(self.data_path)
         self.data_filename = 'fizzbuzz_data'
         
     def load_data(self, set: Literal['original', 'preprocessed'], set_length: int = 100, return_df = True) -> tuple[np.ndarray, np.ndarray]:
-        
+        """
+        Load FizzBuzz classification data from a CSV file.
+
+        Args:
+            set (Literal['original', 'preprocessed']): The dataset to load ('original' or 'preprocessed').
+            set_length (int, optional): The length of the dataset. Default is 100.
+            return_df (bool, optional): If True, returns a DataFrame. If False, returns numpy arrays. Default is True.
+
+        Returns:
+            tuple[np.ndarray, np.ndarray] or pd.DataFrame: Tuple containing features and labels as numpy arrays, or a DataFrame if return_df is True.
+        """
         # Specify file name
         filename = str.join('_', [self.data_filename, str(set_length), set]) + '.csv'
         # Verify existence of data file
@@ -31,7 +63,12 @@ class DataLoader:
         return features, labels
     
     def generate_data(self, set_length: int = 100) -> None:
-        
+        """
+        Generate and save FizzBuzz classification data to a CSV file.
+
+        Args:
+            set_length (int, optional): The length of the dataset to generate. Default is 100.
+        """
         # Specify file name
         filename = str.join('_', [self.data_filename, str(set_length), 'original']) + '.csv'
         if os.path.isfile(self.data_path + filename):
@@ -73,4 +110,12 @@ class DataLoader:
         df_data.to_csv(os.path.join(self.data_path, str.join('_', [self.data_filename, str(set_length), 'original']) + '.csv'), index=False)
         
     def save_data(self, df_data: pd.DataFrame, set: str, set_length: int = 100) -> None:
+        """
+        Save DataFrame containing FizzBuzz classification data to a CSV file.
+
+        Args:
+            df_data (pd.DataFrame): DataFrame containing FizzBuzz classification data.
+            set (str): The dataset name ('original' or 'preprocessed').
+            set_length (int, optional): The length of the dataset. Default is 100.
+        """
         df_data.to_csv(os.path.join(self.data_path, str.join('_', [self.data_filename, str(set_length), set]) + '.csv'), index=False)
