@@ -71,7 +71,7 @@ Experiments were conducted using two datasets: the first containing the original
 The outcomes from the original dataset suggest that the decision tree classifier outperformed the SVM. However, with the second dataset, both models achieved a perfect accuracy score.
 The results strongly imply that the feature set obtained after transformation leads to superior performance.
 
-**Results with natural numbers**
+### Results with natural numbers
 
 ![Classifiers in original data](./fizzbuzz_classification/images/originaldata_classifiers_comparison.png)
 
@@ -83,7 +83,7 @@ The results strongly imply that the feature set obtained after transformation le
 
 ![Classifiers cv in original data](./fizzbuzz_classification/images/originaldata_classifiers_cv.png)
 
-**Results with period-based features**
+### Results with period-based features
 
 ![Classifiers in preprocessed data](./fizzbuzz_classification/images/preprocesseddata_classifiers_comparison.png)
 
