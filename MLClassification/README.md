@@ -1,10 +1,12 @@
 # Machine learning classification
 ML FizzBuzz test to build classification models.
 
+![Pipeline](./fizzbuzz_classification/images/datapipeline.png)
+
 ## Table of Contents
 1. [Project Overview](#project-overview)
 2. [Data Description](#data-description)
-3. [Data Preprocessing](#data-preprocessing)
+3. [Data Transformation](#data-transformation)
 3. [Classification Models](#classification-models)
 4. [Evaluation Metrics](#evaluation-metrics)
 5. [Results and Insights](#results-and-insights)
@@ -19,8 +21,8 @@ This repository provides a machine learning test to classify natural numbers int
 The dataset was created by generating natural numbers and label them according to an specific criteria. The dataset consists of one file with two columns: one for the number and another one for the label.
 
 
-## 3. Data Preprocessing <a name="data-preprocessing"></a>
-In the data preprocessing, the primary objective is to ready the dataset for modeling, which involves feature engineering to extract features from the natural numbers taking into account class-related attributes. Additionally, normalization techniques can be used when necessary to standardize the data, ensuring it aligns with the requirements of the selected models and facilitating robust classification performance.
+## 3. Data Transformation <a name="data-transformation"></a>
+In the data transformation, the primary objective is to ready the dataset for modeling, which involves feature engineering to extract features from the natural numbers taking into account class-related attributes. Additionally, normalization techniques can be used when necessary to standardize the data, ensuring it aligns with the requirements of the selected models and facilitating robust classification performance.
 
 
 ## 4. Classification Models <a name="classification-models"></a>
