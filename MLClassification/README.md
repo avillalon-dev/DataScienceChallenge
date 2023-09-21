@@ -36,11 +36,8 @@ You have the flexibility to explore and test other classification models in addi
 - Navigate to the `Model Architectures` section within the notebook.
 - Import the desired classification model that you want to test. For example, the following code was used to import the SVM and Decision Tree classifiers:
 ```python
-# Import classifiers
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
-
-# Initialize models 
 classifiers = [
     SVC(),                    # Support vector machine classifier
     DecisionTreeClassifier()  # Decision tree classifier

@@ -8,6 +8,15 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 import pickle
 
 def weights_for_imbalance_classes(labels: np.ndarray) -> np.ndarray:
+    """
+    Calculate class weights to address class imbalance.
+
+    Args:
+        labels (np.ndarray): Array of class labels.
+
+    Returns:
+        np.ndarray: Array of weights for each class.
+    """
     unique_labels, count_labels = np.unique(labels, return_counts=True)
     samples_count = labels.shape[0]
     weights = np.zeros_like(labels)
@@ -21,6 +30,19 @@ def weights_for_imbalance_classes(labels: np.ndarray) -> np.ndarray:
     return weights
 
 def train_estimator(estimator: BaseEstimator, X, y, params = None, fit_params = None):
+    """
+    Train a Scikit-Learn estimator and optionally save the model to a file.
+
+    Args:
+        estimator (BaseEstimator): Scikit-Learn classifier object.
+        X: Features for training.
+        y: Labels for training.
+        params (dict): Hyperparameters for the estimator (optional).
+        fit_params: Additional fitting parameters (optional).
+
+    Returns:
+        BaseEstimator: Trained classifier.
+    """
     # Set hyperparameters if provided
     if params is not None:
         estimator.set_params(**params)
@@ -50,6 +72,18 @@ def train_estimator(estimator: BaseEstimator, X, y, params = None, fit_params = 
     return estimator
             
 def test_estimator(model: BaseEstimator, X, y):
+    """
+    Test a trained classifier and print accuracy and classification report.
+
+    Args:
+        model (BaseEstimator): Trained Scikit-Learn classifier.
+        X: Features for testing.
+        y: True labels for testing.
+
+    Returns:
+        float: Accuracy of the classifier.
+        np.ndarray: Confusion matrix.
+    """
     # Predict labels on the test set
     print('Testing model')
     y_pred = model.predict(X)
@@ -63,7 +97,23 @@ def test_estimator(model: BaseEstimator, X, y):
     return accuracy, conf_mat
     
 def tune_hyperparam(estimators: Sequence[BaseEstimator], param_grid: Sequence[dict], X_train, y_train, X_test, y_test, cv, verbose, fit_params = None):
-    
+    """
+    Tune hyperparameters for multiple classifiers using GridSearchCV.
+
+    Args:
+        estimators (Sequence[BaseEstimator]): Sequence of Scikit-Learn classifiers.
+        param_grid (Sequence[dict]): Sequence of parameter grids for each estimator.
+        X_train: Features for training.
+        y_train: Labels for training.
+        X_test: Features for testing.
+        y_test: True labels for testing.
+        cv: Number of cross-validation folds.
+        verbose: Verbosity level for GridSearchCV.
+        fit_params: Additional fitting parameters (optional).
+
+    Returns:
+        list: List of best hyperparameters for each classifier.
+    """
     best_params = []
     for e, estimator in enumerate(estimators):
         # Get the current package name
@@ -103,22 +153,21 @@ def tune_hyperparam(estimators: Sequence[BaseEstimator], param_grid: Sequence[di
 
 def train_and_test_classifier(estimators: Sequence[BaseEstimator], X_train, y_train, X_test=None, y_test=None, params: Sequence[dict]=None, fit_params=None):
     """
-    Train and evaluate a Scikit-Learn classifier.
+    Train and evaluate multiple Scikit-Learn classifiers.
 
-    Parameters:
-    - estimator: Scikit-Learn classifier object (e.g., SVC(), RandomForestClassifier(), etc.).
-    - X_train: Training features.
-    - y_train: Training labels.
-    - X_test: Testing features (optional).
-    - y_test: Testing labels (optional).
-    - params: Dictionary of hyperparameters (optional).
+    Args:
+        estimators (Sequence[BaseEstimator]): Sequence of Scikit-Learn classifiers.
+        X_train: Features for training.
+        y_train: Labels for training.
+        X_test: Features for testing (optional).
+        y_test: True labels for testing (optional).
+        params (Sequence[dict]): Sequence of hyperparameter dictionaries for each classifier (optional).
+        fit_params: Additional fitting parameters (optional).
 
     Returns:
-    - trained_estimator: Trained classifier.
-    - train_accuracy: Accuracy on the training set.
-    - test_accuracy: Accuracy on the testing set (if provided).
+        list: List of trained classifiers.
+        list: List of dictionaries containing classifier information.
     """
-
     trained_estimators = []
     train_info = []
     for e, estimator in enumerate(estimators):
@@ -138,6 +187,19 @@ def train_and_test_classifier(estimators: Sequence[BaseEstimator], X_train, y_tr
     return trained_estimators, train_info
 
 def cross_validate_classifiers(estimators: Sequence[BaseEstimator], X, y, k, fit_params=None):
+    """
+    Cross-validate multiple classifiers and compute average accuracies.
+
+    Args:
+        estimators (Sequence[BaseEstimator]): Sequence of Scikit-Learn classifiers.
+        X: Features for cross-validation.
+        y: True labels for cross-validation.
+        k: Number of cross-validation folds.
+        fit_params: Additional fitting parameters (optional).
+
+    Returns:
+        list: List of dictionaries containing classifier information and average accuracies.
+    """
     cv_info = []
     for e, estimator in enumerate(estimators):
         estimator_name = str(type(estimator).__name__)
@@ -148,6 +210,15 @@ def cross_validate_classifiers(estimators: Sequence[BaseEstimator], X, y, k, fit
     return cv_info
 
 def get_best_estimator(classifiers_info: Sequence[dict]):
+    """
+    Identify the best classifier based on test accuracy.
+
+    Args:
+        classifiers_info (Sequence[dict]): Sequence of classifier information dictionaries.
+
+    Returns:
+        tuple: Best classifier name, index, and test accuracy.
+    """
     # Extract testing accuracies
     test_accuracies = [clf['test_accuracy'] for clf in classifiers_info]
     # Find the best classifier based on test accuracy
