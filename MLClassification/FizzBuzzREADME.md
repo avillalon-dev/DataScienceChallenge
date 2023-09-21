@@ -1,4 +1,4 @@
-# Machine learning classification
+# Machine learning FizzBuzz classification
 ML FizzBuzz test to build classification models.
 
 ![Pipeline](./fizzbuzz_classification/images/datapipeline.png)
@@ -31,12 +31,15 @@ This repository provides a machine learning test to classify natural numbers int
 
 *The required theoretical description should be put with the other files from the project, could be in the README or other documentation format.*
 
+
 ## 2. Data Description <a name="data-description"></a>
 The dataset was created by generating natural numbers and label them according to an specific criteria. The dataset consists of one file with two columns: one for the number and another one for the label.
 - Data generation: Write a program that given the numbers from 1 to 100 print “None” for each number. But for multiples of three print “Fizz” instead of “None” and for the multiples of five print “Buzz”. For numbers which are multiples of both three and five print “FizzBuzz”.
 
+
 ## 3. Data Transformation <a name="data-transformation"></a>
-In the data transformation, the primary objective is to ready the dataset for modeling, which involves feature engineering to extract features from the natural numbers taking into account class-related attributes. Additionally, normalization techniques can be used when necessary to standardize the data, ensuring it aligns with the requirements of the selected models and facilitating robust classification performance.
+In the data transformation, the primary objective is to ready the dataset for modeling, which involves feature engineering to extract features from the natural numbers taking into account class-related attributes. The generated features are calculated by treating each class as a time series, where the natural number is regarded as the time instant. Consequently, the smallest periods (greater than one) for each time series are computed. To indicate alignment with a specific time series, the modulus of each time instant is calculated concerning all periods derived from all time series. This process results in the generation of "period-based features" from the original data.
+Additionally, normalization techniques can be used when necessary to standardize the data, ensuring it aligns with the requirements of the selected models and facilitating robust classification performance.
 
 
 ## 4. Classification Models <a name="classification-models"></a>
@@ -68,22 +71,34 @@ Experiments were conducted using two datasets: the first containing the original
 The outcomes from the original dataset suggest that the decision tree classifier outperformed the SVM. However, with the second dataset, both models achieved a perfect accuracy score.
 The results strongly imply that the feature set obtained after transformation leads to superior performance.
 
-Results with natural numbers
+**Results with natural numbers**
+
 ![Classifiers in original data](./fizzbuzz_classification/images/originaldata_classifiers_comparison.png)
+
+**Best classifier confusion matrix**
 ![Best classifier in original data confusion matrix](./fizzbuzz_classification/images/originaldata_bestclassifier_cm.png)
 
-Results with period-based features
+**K-fold cross validation with k = 10 using natural numbers**
+
+![Classifiers cv in original data](./fizzbuzz_classification/images/originaldata_classifiers_cv.png)
+
+**Results with period-based features**
+
 ![Classifiers in preprocessed data](./fizzbuzz_classification/images/preprocesseddata_classifiers_comparison.png)
+
+**Best classifier confusion matrix**
+
 ![Best classifier in preprocessed data confusion matrix](./fizzbuzz_classification/images/preprocesseddata_bestclassifier_cm.png)
 
-K-fold cross validation with k = 10 using natural numbers
-![Classifiers cv in original data](./fizzbuzz_classification/images/originaldata_classifiers_cv.png)
+**K-fold cross validation with k = 10 using period-based features**
+
+![Classifiers cv in preprocessed data](./fizzbuzz_classification/images/preprocesseddata_classifiers_cv.png)
 
 
 ## 7. Conclusions <a name="conclusions"></a>
-The problem in this project focused on classifying natural numbers into four classes: "None," "Fizz," "Buzz," and "FizzBuzz." Two datasets were employed: one with original natural numbers and the other with features generated during data transformation. The results indicated that the DT classifier outperformed the SVM when using the original dataset. However, when utilizing the transformed dataset, both models achieved perfect accuracy scores. This underscores the crucial role of data transformation and feature engineering in enhancing classification performance.
+The problem in this project focused on classifying natural numbers into four classes: "None," "Fizz," "Buzz," and "FizzBuzz." Two datasets were employed: one with original natural numbers and the period-based features generated during data transformation. "Period-based features" are derived by calculating the modulus of each natural number concerning the smallest periods obtained from all time series, treating the natural numbers as time instants in the time series represented by the classes. After training and testing the classification model, the results indicated that the DT classifier outperformed the SVM when using the original dataset. However, when utilizing the transformed dataset, both models achieved perfect accuracy scores. This underscores the crucial role of data transformation and feature engineering in enhancing classification performance.
 
 
 ## 8. References <a name="references"></a>
-1. [Géron, A. (2022). Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (3rd ed.). O'Reilly Media, Inc.](https://www.oreilly.com/library/view/hands-on-machine-learning/9781098125967/)
+- [Géron, A. (2022). Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (3rd ed.). O'Reilly Media, Inc.](https://www.oreilly.com/library/view/hands-on-machine-learning/9781098125967/)
 
